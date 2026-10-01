@@ -1,119 +1,112 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-struct Node
+class Node
 {
+public:
     string page;
     Node *next;
+
+    Node(string p)
+    {
+        page = p;
+        next = NULL;
+    }
 };
 
-class BrowserHistory
+class Browser
 {
-private:
     Node *top;
+    string currentPage;
 
 public:
-    BrowserHistory()
+    Browser(string page)
     {
         top = NULL;
+        currentPage = page;
     }
 
     void visit(string page)
     {
-        Node *newNode = new Node();
+        Node *newNode = new Node(currentPage);
 
-        newNode->page = page;
         newNode->next = top;
         top = newNode;
 
-        cout << "Visited: " << page << endl;
-        displayCurrentPage();
+        currentPage = page;
+
+        cout << "Current Page: " << currentPage << endl;
     }
 
     void back()
     {
         if (top == NULL)
         {
-            cout << "Error: No history left. Cannot go back.\n";
+            cout << "No previous page" << endl;
+            cout << "Current Page: " << currentPage << endl;
             return;
         }
 
         Node *temp = top;
-        top = top->next;
 
-        cout << "Going back from: " << temp->page << endl;
+        currentPage = top->page;
+        top = top->next;
 
         delete temp;
 
-        displayCurrentPage();
+        cout << "Current Page: " << currentPage << endl;
     }
 
-    void displayCurrentPage()
+    void display()
     {
-        if (top == NULL)
-        {
-            cout << "Current page: No page\n";
-        }
-        else
-        {
-            cout << "Current page: " << top->page << endl;
-        }
-    }
-
-    ~BrowserHistory()
-    {
-        while (top != NULL)
-        {
-            Node *temp = top;
-            top = top->next;
-            delete temp;
-        }
+        cout << "Current Page: " << currentPage << endl;
     }
 };
 
 int main()
 {
-    BrowserHistory browser;
+    Browser browser("Home");
 
     int choice;
     string page;
 
-    while (choice <= 4)
+    do
     {
-        cout << "\n----- WEB BROWSER -----\n";
-        cout << "1. Visit Page\n";
-        cout << "2. Back\n";
-        cout << "3. Display Current Page\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
+        cout << endl;
+        cout << "----- BROWSER MENU -----" << endl;
+        cout << "1. Visit Page" << endl;
+        cout << "2. Back" << endl;
+        cout << "3. Current Page" << endl;
+        cout << "4. Exit" << endl;
+
+        cout << "Enter choice: ";
         cin >> choice;
 
         switch (choice)
         {
-        case 1:
-            cout << "Enter page name/URL: ";
-            cin >> page;
-            browser.visit(page);
-            break;
+            case 1:
+                cout << "Enter page: ";
+                cin >> page;
+                browser.visit(page);
+                break;
 
-        case 2:
-            browser.back();
-            break;
+            case 2:
+                browser.back();
+                break;
 
-        case 3:
-            browser.displayCurrentPage();
-            break;
+            case 3:
+                browser.display();
+                break;
 
-        case 4:
-            cout << "Program terminated.\n";
-            return 0;
+            case 4:
+                cout << "Program ended" << endl;
+                break;
 
-        default:
-            cout << "Invalid choice.\n";
+            default:
+                cout << "Invalid choice" << endl;
         }
 
-    }
+    } while (choice != 4);
 
     return 0;
 }
