@@ -23,11 +23,11 @@ int main() {
             return 1;
         }
 
-        // The last digit determines the initial slot; normalize for negative values too.
+       
         int index = static_cast<int>((registration % TABLE_SIZE + TABLE_SIZE) % TABLE_SIZE);
         bool placed = false;
 
-        // Linear probing checks at most TABLE_SIZE positions, so it cannot loop forever.
+       
         for (int probe = 0; probe < TABLE_SIZE; ++probe) {
             if (!occupied[index]) {
                 table[index] = registration;
@@ -36,7 +36,7 @@ int main() {
                 cout << "Vehicle " << registration << " assigned to slot " << index << ".\n";
                 break;
             }
-            index = (index + 1) % TABLE_SIZE; // Wrap around at the end of the table.
+            index = (index + 1) % TABLE_SIZE; 
         }
 
         if (!placed) {
