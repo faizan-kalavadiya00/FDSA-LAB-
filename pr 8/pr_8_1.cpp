@@ -10,9 +10,7 @@ struct Node {
     explicit Node(int value) : data(value), left(nullptr), right(nullptr) {}
 };
 
-// Build a binary tree from preorder input. Use -1 to represent a null child.
-// Example input for a tree with root 1 and children 2 and 3:
-// 1 2 -1 -1 3 -1 -1
+
 Node* buildTree() {
     int value;
     if (!(cin >> value)) {
