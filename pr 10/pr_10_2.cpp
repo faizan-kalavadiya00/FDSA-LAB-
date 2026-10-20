@@ -6,7 +6,7 @@ using namespace std;
 constexpr int TABLE_SIZE = 10;
 
 int hashCode(long long code) {
-    // Keep the shelf index in the range 0 to TABLE_SIZE - 1.
+    
     return static_cast<int>((code % TABLE_SIZE + TABLE_SIZE) % TABLE_SIZE);
 }
 
@@ -29,7 +29,7 @@ int main() {
         }
 
         int shelf = hashCode(code);
-        shelves[shelf].push_back(code); // Chaining stores colliding codes in one list.
+        shelves[shelf].push_back(code);
     }
 
     cout << "\nFinal shelf contents (chaining):\n";
