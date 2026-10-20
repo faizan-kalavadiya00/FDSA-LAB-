@@ -9,8 +9,7 @@ int primaryHash(long long id) {
 }
 
 int secondaryHash(long long id) {
-    // For a table of size 10, these jump sizes are all relatively prime to 10.
-    // Therefore, a probe sequence can reach every slot instead of cycling through a subset.
+    
     constexpr int jumpSizes[4] = {1, 3, 7, 9};
     int index = static_cast<int>((id % 4 + 4) % 4);
     return jumpSizes[index];
@@ -39,7 +38,7 @@ int main() {
         int jump = secondaryHash(id);
         bool placed = false;
 
-        // The second hash determines the jump after a collision.
+       
         for (int attempt = 0; attempt < TABLE_SIZE; ++attempt) {
             int index = (first + attempt * jump) % TABLE_SIZE;
             if (!occupied[index]) {
