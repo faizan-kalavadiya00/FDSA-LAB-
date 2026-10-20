@@ -20,7 +20,7 @@ Node* insertCode(Node* root, long long code, bool& inserted) {
     } else if (code > root->code) {
         root->right = insertCode(root->right, code, inserted);
     } else {
-        // Book codes are intended to be unique, so ignore a duplicate code.
+        
         inserted = false;
     }
     return root;
