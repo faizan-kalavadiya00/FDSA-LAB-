@@ -29,7 +29,7 @@ void breadthFirstSearch(int start, const vector<vector<int>>& adjacency) {
 
         for (int neighbour : adjacency[vertex]) {
             if (!visited[neighbour]) {
-                visited[neighbour] = true; // Mark when queued to avoid duplicates.
+                visited[neighbour] = true; 
                 pending.push(neighbour);
             }
         }
@@ -53,7 +53,7 @@ int main() {
             return 1;
         }
         adjacency[u].push_back(v);
-        adjacency[v].push_back(u); // Roads are undirected.
+        adjacency[v].push_back(u); 
     }
 
     int start;
